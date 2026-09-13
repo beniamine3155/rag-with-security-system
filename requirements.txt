@@ -1,0 +1,24 @@
+# For Jupyter Notebook
+ipykernel
+
+
+# For environment variable management
+python-dotenv
+
+
+# For ai agents
+langchain
+langchain-core
+langchain-community
+
+
+# LLM providers
+langchain-groq
+langchain-text-splitters
+
+
+# For vector database 
+langchain-qdrant
+qdrant-client
+
+
