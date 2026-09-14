@@ -26,7 +26,7 @@ def build_vector_store_for_document(file_path: str = config.DATA_FILE_PATH):
     return vector_store
 
 
-def build_hr_agent(file_path: str = config.DATA_FILE_PATH):
+def build_hr_assistant(file_path: str = config.DATA_FILE_PATH):
     config.check_api_keys()
 
     vector_store = build_vector_store_for_document(file_path)
