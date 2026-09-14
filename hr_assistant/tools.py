@@ -1,6 +1,4 @@
 
-from asyncio import QueueEmpty
-
 from langchain.tools import tool
 
 
@@ -13,7 +11,7 @@ def create_serch_tool(retriever):
     def search_hr_policy(question: str) -> str:
         """
         Searches the HR policy documents for relevant information based on the user's question.
-        
+
         """
         matching_chunks = retriever.invoke(question)
         return "\n\n".join(chunk.page_content for chunk in matching_chunks)

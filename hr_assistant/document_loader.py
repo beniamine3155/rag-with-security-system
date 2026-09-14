@@ -5,6 +5,7 @@ from hr_assistant import config
 
 
 def load_document(file_path: str = config.DATA_FILE_PATH):
+    """Loads the document from the specified file path using the TextLoader."""
     loader = TextLoader(file_path, encoding="utf-8")
     documents = loader.load()
     return documents
