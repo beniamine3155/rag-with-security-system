@@ -7,8 +7,17 @@ LOGS_DIR = "logs"
 os.makedirs(LOGS_DIR, exist_ok=True)
 
 
-_run_started_at = datetime.now().strftime("%Y%m%d_%H%M%S")
-RUN_LOG_FILE = os.path.join(LOGS_DIR, f"run_{_run_started_at}.log")
+# Get current date and time
+now = datetime.now()
+
+run_date = now.strftime("%Y-%m-%d")
+run_time = now.strftime("%H%M%S")
+
+DATE_LOGS_DIR = os.path.join(LOGS_DIR, run_date)
+os.makedirs(DATE_LOGS_DIR, exist_ok=True)
+
+
+RUN_LOG_FILE = os.path.join(DATE_LOGS_DIR, f"run_{run_time}.log")
 
 
 logging.basicConfig( 
