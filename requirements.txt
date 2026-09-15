@@ -21,4 +21,8 @@ langchain-text-splitters
 langchain-qdrant
 qdrant-client
 
+# LLM Gateways
+portkey-ai
+langchain-openai
+
 
