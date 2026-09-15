@@ -12,6 +12,9 @@ from hr_assistant.llm import get_llm
 from hr_assistant.tools import create_serch_tool
 from hr_assistant.agent import create_hr_agent
 from hr_assistant.tracing import check_langsmith_tracing
+
+from hr_assistant.guardrails import REFUSAL_MESSAGE, check_input, check_output
+
 from hr_assistant.logger import get_logger
 
 logger = get_logger(__name__)
@@ -62,6 +65,20 @@ def ask(agent, question: str) -> str:
     Asks a question to the HR assistant agent and returns the response.
     """
     logger.info("Asking question to HR assistant: %s", question)
+
+    # input guard
+    input_is_safe, _ = check_input(question)
+    if not input_is_safe:
+        return REFUSAL_MESSAGE
+
     response = agent.invoke({"messages": [{"role": "user", "content": question }]})
-    logger.info("Received response from HR assistant.")
-    return response["messages"][-1].content
+    answer =  response["messages"][-1].content
+    logger.info("Final answer: %s", answer)
+
+    output_is_safe, _ = check_output(answer)
+    if not output_is_safe:
+        return REFUSAL_MESSAGE
+    
+    return answer
+\
+    

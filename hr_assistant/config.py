@@ -35,6 +35,10 @@ SYSTEM_PROMPT = (
 )
 
 
+# GUARD MODEL 
+GUARD_MODEL_NAME = "openai/gpt-oss-safeguard-20b"
+
+
 # TRACING 
 LANGSMITH_TRACING = os.getenv("LANGSMITH_TRACING", "false")
 LANGSMITH_ENDPOINT = os.getenv("LANGSMITH_ENDPOINT")
