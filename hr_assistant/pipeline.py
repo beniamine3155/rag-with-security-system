@@ -11,6 +11,9 @@ from hr_assistant.vector_store import(
 from hr_assistant.llm import get_llm
 from hr_assistant.tools import create_serch_tool
 from hr_assistant.agent import create_hr_agent
+from hr_assistant.logger import get_logger
+
+logger = get_logger(__name__)
 
 
 def build_vector_store_for_document(file_path: str = config.DATA_FILE_PATH):
@@ -20,8 +23,10 @@ def build_vector_store_for_document(file_path: str = config.DATA_FILE_PATH):
     it creates a new one from the provided document.
     """
     if vector_store_exists():
+        logger.info("Vector store already exists. Loading existing vector store.")
         return load_vector_store()
 
+    logger.info("Vector store does not exist. Building a new vector store from document.")
     documents = load_document(file_path)
     chunks = split_into_chunks(documents)
 
@@ -35,6 +40,7 @@ def build_hr_assistant(file_path: str = config.DATA_FILE_PATH):
     """
     Builds the HR assistant by creating a vector store, retriever, search tool, and agent
     """
+    logger.info("Building HR assistant...")
     config.check_api_keys()
 
     vector_store = build_vector_store_for_document(file_path)
@@ -45,6 +51,7 @@ def build_hr_assistant(file_path: str = config.DATA_FILE_PATH):
 
     agent = create_hr_agent(llm, [search_tool])
 
+    logger.info("HR assistant built successfully.")
     return agent
 
 
@@ -52,5 +59,7 @@ def ask(agent, question: str) -> str:
     """
     Asks a question to the HR assistant agent and returns the response.
     """
+    logger.info("Asking question to HR assistant: %s", question)
     response = agent.invoke({"messages": [{"role": "user", "content": question }]})
+    logger.info("Received response from HR assistant.")
     return response["messages"][-1].content
