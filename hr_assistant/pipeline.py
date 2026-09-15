@@ -3,7 +3,6 @@ from hr_assistant.document_loader import load_document
 from hr_assistant.splitter import split_into_chunks
 from hr_assistant.vector_store import(
     build_vector_store,
-    save_vector_store,
     load_vector_store,
     vector_store_exists,
     get_retriever
@@ -35,7 +34,6 @@ def build_vector_store_for_document(file_path: str = config.DATA_FILE_PATH):
     chunks = split_into_chunks(documents)
 
     vector_store = build_vector_store(chunks)
-    save_vector_store(vector_store)
 
     return vector_store
 
