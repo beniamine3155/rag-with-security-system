@@ -27,3 +27,7 @@ langchain-openai
 
 # For evaluation
 openevals
+
+
+# For UI
+streamlit
