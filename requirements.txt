@@ -25,4 +25,5 @@ qdrant-client
 portkey-ai
 langchain-openai
 
-
+# For evaluation
+openevals
